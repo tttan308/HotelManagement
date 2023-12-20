@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="h-[100px] bg-main flex justify-between items-center px-8">
+    <div className="h-[80px] bg-main flex justify-between items-center px-8">
       <Link
         to="/"
         className="flex items-center gap-2 text-white font-semibold text-3xl"

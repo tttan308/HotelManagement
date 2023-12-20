@@ -10,7 +10,7 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <div className="">
-      <div className="bg-[#212529] min-h-[280px] px-20 gap-10 pt-8 flex text-white">
+      <div className="bg-[#212529] min-h-[250px] px-20 gap-10 pt-8 flex text-white">
         <div className="flex-1">
           <div className="flex items-center gap-2 text-main font-semibold text-2xl">
             <span>BORN</span>
@@ -63,7 +63,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-black h-[80px] flex justify-between px-20 text-lg text-white font-semibold items-center">
+      <div className="bg-black h-[60px] flex justify-between px-20 text-lg text-white font-semibold items-center">
         <p>Contact</p>
         <p>Terms of use</p>
         <p>Privacy</p>

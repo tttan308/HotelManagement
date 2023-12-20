@@ -6,6 +6,9 @@ export default {
       colors: {
         main: "#1AACAC",
       },
+      boxShadow: {
+        outer: "0px 5px 15px rgba(0, 0, 0, 0.35)",
+      },
     },
   },
   plugins: [],
