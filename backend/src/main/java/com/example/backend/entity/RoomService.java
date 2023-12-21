@@ -6,6 +6,7 @@ import org.apache.catalina.Service;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class RoomService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +27,6 @@ public class RoomService {
     private Date endDate; // Ngày dự kiến kết thúc cung cấp dịch vụ (đối với một vài dịch vụ đặc biệt)
 
     private String status; // Trạng thái hiện tại của dịch vụ phòng (mô tả rằng dịch vụ còn tồn tại trong phòng này không)
-
-    // Constructors, getters, setters và các phương thức khác.
 
     public RoomService() {
     }

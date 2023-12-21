@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+@Entity
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
