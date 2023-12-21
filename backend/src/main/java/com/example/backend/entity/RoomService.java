@@ -1,7 +1,6 @@
 package com.example.backend.entity;
 
 import jakarta.persistence.*;
-import org.apache.catalina.Service;
 
 import java.util.Date;
 import java.util.Objects;
