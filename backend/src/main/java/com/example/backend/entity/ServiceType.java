@@ -13,10 +13,10 @@ public class ServiceType {
 
     private String serviceName;
 
-    private String description; // Mô tả chi tiết về loại dịch vụ
+    private String description;
 
     @OneToMany(mappedBy = "serviceType")
-    private List<Service> services; // Danh sách các dịch vụ thuộc loại dịch vụ này
+    private List<Service> services;
 
     public ServiceType() {
     }

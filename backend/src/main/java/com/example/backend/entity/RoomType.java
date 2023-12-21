@@ -16,7 +16,7 @@ public class RoomType {
     private int capacity;
     private double basePrice;
 
-    @OneToMany(mappedBy = "roomType") // Danh sách các phòng thuộc loại phòng này
+    @OneToMany(mappedBy = "roomType")
     private List<Room> rooms;
 
     public RoomType() {

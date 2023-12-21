@@ -13,22 +13,20 @@ public class Service {
     private String serviceName;
 
     @ManyToOne
-    @JoinColumn(name = "service_type_id") // Định danh của loại dịch vụ
+    @JoinColumn(name = "service_type_id")
     private ServiceType serviceType;
 
-    private boolean availability; // Tình trạng sẵn có của dịch vụ
+    private boolean availability;
 
-    private double price; // Giá của dịch vụ (nếu không miễn phí)
+    private double price;
 
-    private String schedule; // Thời gian hoạt động hoặc lịch trình cung cấp dịch vụ
+    private String schedule;
 
-    private String location; // Vị trí cung cấp dịch vụ trong khách sạn
+    private String location;
 
-    private String serviceImageId; // Định danh hình ảnh của dịch vụ
+    private String serviceImageId;
 
-    private String termsAndConditions; // Điều khoản và điều kiện sử dụng dịch vụ
-
-    // Constructors, getters, setters và các phương thức khác.
+    private String termsAndConditions;
 
     public Service() {
     }

@@ -12,20 +12,20 @@ public class RoomService {
     private Long roomServiceId;
 
     @ManyToOne
-    @JoinColumn(name = "room_id") // Định danh của phòng mà dịch vụ sẽ được cung cấp
+    @JoinColumn(name = "room_id")
     private Room room;
 
     @ManyToOne
-    @JoinColumn(name = "service_id") // Định danh cho loại dịch vụ được cung cấp
+    @JoinColumn(name = "service_id")
     private Service service;
 
     @Temporal(TemporalType.DATE)
-    private Date startDate; // Ngày bắt đầu cung cấp dịch vụ
+    private Date startDate;
 
     @Temporal(TemporalType.DATE)
-    private Date endDate; // Ngày dự kiến kết thúc cung cấp dịch vụ (đối với một vài dịch vụ đặc biệt)
+    private Date endDate;
 
-    private String status; // Trạng thái hiện tại của dịch vụ phòng (mô tả rằng dịch vụ còn tồn tại trong phòng này không)
+    private String status;
 
     public RoomService() {
     }
@@ -101,7 +101,6 @@ public class RoomService {
     @Override
     public String toString() {
         return "RoomService{" +
-                "roomServiceId=" + roomServiceId +
                 ", room=" + room +
                 ", service=" + service +
                 ", startDate=" + startDate +
