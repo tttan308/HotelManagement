@@ -1,13 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-import { IoPerson } from "react-icons/io5";
-import { FaFacebookMessenger } from "react-icons/fa6";
-import { useState } from "react";
 
 const Header = () => {
-  const [authenticated, setAuthenticated] = useState(true);
-
   return (
-    <div className="h-[100px] bg-main flex justify-between items-center px-8 border-black bg-[#1AACAC] w-full">
+    <div className="h-[80px] bg-main flex justify-between items-center px-8">
       <Link
         to="/"
         className="flex items-center gap-2 text-white font-semibold text-3xl"
@@ -58,25 +53,14 @@ const Header = () => {
           Liên hệ
         </NavLink>
       </div>
-      {authenticated ? (
-        <div className="flex flex-row gap-x-4">
-          <button className="p-3 rounded-full bg-[#D9D9D9] hover:bg-[#F6F6F6]">
-            <FaFacebookMessenger size={20} />
-          </button>
-          <button className="p-3 rounded-full bg-[#D9D9D9] hover:bg-[#F6F6F6]">
-            <IoPerson size={20} />
-          </button>
-        </div>
-      ) : (
-        <div className="">
-          <button className="bg-white text-main  font-semibold py-3 px-5 rounded-md">
-            Đăng nhập
-          </button>
-          <button className="border-2 text-white  font-semibold py-3 px-6 rounded-md">
-            Đăng ký
-          </button>
-        </div>
-      )}
+      <div className="flex gap-4">
+        <button className="bg-white text-main  font-semibold py-3 px-5 rounded-md">
+          Đăng nhập
+        </button>
+        <button className="border-2 text-white  font-semibold py-3 px-6 rounded-md">
+          Đăng ký
+        </button>
+      </div>
     </div>
   );
 };

@@ -10,11 +10,11 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <div className="">
-      <div className="bg-[#212529] min-h-[280px] px-20 gap-10 pt-8 flex text-white">
+      <div className="bg-[#212529] min-h-[250px] px-20 gap-10 pt-8 flex text-white">
         <div className="flex-1">
-          <div className="flex items-center gap-2 text-main font-semibold text-2xl text-[#2E97A7]">
+          <div className="flex items-center gap-2 text-main font-semibold text-2xl">
             <span>BORN</span>
-            <div className="rounded-full bg-main h-3 w-3 bg-[#2E97A7]"></div>
+            <div className="rounded-full bg-main h-3 w-3"></div>
             <span>PINK</span>
           </div>
           <p className="mt-8">
@@ -22,22 +22,22 @@ const Footer = () => {
             năm.
           </p>
           <div className="flex mt-6 gap-8">
-            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center border-[#2E97A7] hover:bg-[#362FD9] hover:border-none hover:cursor-pointer">
+            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center">
               <FontAwesomeIcon icon={faFacebookF} />
             </div>
-            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center border-[#2E97A7] hover:bg-[#362FD9] hover:border-none hover:cursor-pointer">
+            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center">
               <FontAwesomeIcon icon={faTwitter} />
             </div>
-            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center border-[#2E97A7] hover:bg-[#362FD9] hover:border-none hover:cursor-pointer">
+            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center">
               <FontAwesomeIcon icon={faInstagram} />
             </div>
-            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center border-[#2E97A7] hover:bg-[#362FD9] hover:border-none hover:cursor-pointer">
+            <div className="border border-main rounded-full w-8 h-8 flex items-center justify-center">
               <FontAwesomeIcon icon={faYoutube} />
             </div>
           </div>
         </div>
         <div className="flex-1">
-          <p className="flex items-center gap-2 text-main font-semibold text-2xl text-[#2E97A7]">
+          <p className="flex items-center gap-2 text-main font-semibold text-2xl">
             Liên hệ
           </p>
           <p className="mt-8">(+84) 345730705</p>
@@ -45,7 +45,7 @@ const Footer = () => {
           <p className="mt-4">Thu Duc, Ho Chi Minh City, Viet Nam</p>
         </div>
         <div className="flex-1">
-          <p className="flex items-center gap-2 text-main font-semibold text-2xl text-[#2E97A7]">
+          <p className="flex items-center gap-2 text-main font-semibold text-2xl">
             Thông báo mới{" "}
           </p>
           <p className="mt-8">
@@ -57,13 +57,13 @@ const Footer = () => {
               className="bg-[#393D4A] placeholder:text-white px-4 py-3"
               placeholder="Email"
             />
-            <button className="bg-main px-4 flex items-center justify-center bg-[#2E97A7]">
+            <button className="bg-main px-3 flex items-center justify-center">
               <FontAwesomeIcon icon={faPaperPlane} />
             </button>
           </div>
         </div>
       </div>
-      <div className="bg-black h-[80px] flex justify-between px-20 text-lg text-white font-semibold items-center">
+      <div className="bg-black h-[60px] flex justify-between px-20 text-lg text-white font-semibold items-center">
         <p>Contact</p>
         <p>Terms of use</p>
         <p>Privacy</p>
