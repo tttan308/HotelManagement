@@ -8,4 +8,6 @@ const StaffRoute = ({ user, children }) => {
   return children;
 };
 
+
 export default StaffRoute;
+
