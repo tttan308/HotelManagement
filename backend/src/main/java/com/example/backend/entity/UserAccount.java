@@ -1,22 +1,23 @@
 package com.example.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class UserAccount {
+public class UserAccount implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userAccountId;
 
     private String username;
     private String password;
-    private String role;
     private String name;
     private String email;
     private String phoneNumber;
@@ -25,10 +26,12 @@ public class UserAccount {
     // Một định danh cho hình ảnh đại diện của người dùng, có thể thay thế bằng URL hình ảnh
     private String userImageId;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
     public UserAccount() {
     }
 
-    public UserAccount(String username, String password, String role, String name, String email, String phoneNumber, Date birthDay, String userImageId) {
+    public UserAccount(String username, String password, Role role, String name, String email, String phoneNumber, Date birthDay, String userImageId) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -51,8 +54,33 @@ public class UserAccount {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     public String getPassword() {
@@ -63,11 +91,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
