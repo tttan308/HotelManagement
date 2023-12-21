@@ -14,8 +14,8 @@ public class Room {
     private String roomName;
 
     @ManyToOne
-    @JoinColumn(name = "room_type_id") // Định danh của loại phòng
-    private RoomType roomType; // Tham chiếu đến RoomType
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
 
     private String status;
     private String roomImageId;
@@ -23,7 +23,6 @@ public class Room {
 
     @ElementCollection
     private List<String> features;
-    // Constructors, getters, setters, và các phương thức khác.
 
     public Room() {
     }
@@ -100,7 +99,6 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                "roomId=" + roomId +
                 ", roomName='" + roomName + '\'' +
                 ", roomType=" + roomType +
                 ", status='" + status + '\'' +
