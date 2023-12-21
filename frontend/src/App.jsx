@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
-import { Home, About } from "./pages";
+import { Home, About, Service, Profile } from "./pages";
 
 export default function App() {
   return (
@@ -9,6 +9,8 @@ export default function App() {
         <Route path="/" element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>
