@@ -6,8 +6,72 @@ import {
   faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import RoomDetail from "../components/RoomDetail";
 
 export default function Home() {
+  const rooms = [
+    {
+      id: 1,
+      year: 2023,
+      name: "Premium King Room",
+      src: "https://plus.unsplash.com/premium_photo-1663126298656-33616be83c32?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cm9vbXN8ZW58MHx8MHx8fDA%3D",
+      star: 3,
+      saving: true,
+      priceString: "2.000.000",
+      price: "1.740.000",
+      featured: ["2 phòng ngủ", "2 phòng tắm", "1 ban công"],
+      utils: 2,
+      descriptions: [
+        "Đang  thu hút nhiều lượt đặt, lần đặt gần nhất 1 giờ trước!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
+      discount: 13,
+      reviewCount: 102,
+      vote_average: 8.2,
+    },
+    {
+      id: 2,
+      year: 2023,
+      saving: true,
+      priceString: "1.399.000",
+      price: "1.119.200",
+      name: "Deluxe Room",
+      src: "https://plus.unsplash.com/premium_photo-1675615667752-2ccda7042e7e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHJvb21zfGVufDB8fDB8fHww",
+      star: 4,
+      featured: ["1 phòng ngủ", "1 phòng tắm", "1 ban công"],
+      utils: 2,
+      descriptions: [
+        "Cung cấp không gian phòng hiện đại, đầy đủ tiện nghi.!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
+      reviewCount: 120,
+      discount: 13,
+      vote_average: 7.9,
+    },
+    {
+      id: 3,
+      year: 2023,
+      saving: true,
+      name: "Room With View",
+      src: "https://images.unsplash.com/photo-1559414059-34fe0a59e57a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cm9vbSUyMHZpZXd8ZW58MHx8MHx8fDA%3D",
+      star: 4,
+      priceString: "2.000.000",
+      discount: 13,
+      price: "1.740.000",
+      featured: ["1 phòng ngủ", "1 phòng tắm", "1 view biển"],
+      utils: 2,
+      descriptions: [
+        "Tầm nhìn tuyệt vời từ căn phòng của quý khách, mang đến cho quý khách không gian thoải mái để tận hưởng cuộc sống!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
+      reviewCount: 209,
+      vote_average: 8.7,
+    },
+  ];
+
   return (
     <div className="">
       <div className="relative">
@@ -115,9 +179,15 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="mt-16 text-main px-16 text-center mb-16">
+      <div className="mt-16 text-main px-20 text-center mb-16">
         <p className=" font-semibold text-4xl">Phòng cao cấp</p>
-        <div className="flex gap-2 bg-red-300 h-10 mt-10"></div>
+        <div className="flex gap-10 mt-10 flex-col">
+          {rooms.map((r, i) => (
+            <div className="mx-auto w-[90%]" key={i}>
+              <RoomDetail room={r} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
