@@ -19,27 +19,32 @@ public class JwtService {
 
     private static final String SECRET_KEY = "mdTrgvnTFRD4jrKWqLMu4OX+1Iuw7y4qpMzzUiVvVfpcu7YxFbzzkfez6AEJm1oH";
 
+    //  Trích xuất tên người dùng (username) từ JWT.
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
+    //  Trích xuất thông tin cụ thể từ JWT dựa trên một hàm xử lý Claims.
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
+    // Tạo JWT cho một người dùng cụ thể.
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
+    // Tạo JWT cho một người dùng cụ thể với các thông tin bổ sung.
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails
     ) {
-//        return buildToken(extraClaims, userDetails, jwtExpiration);
+        //  return buildToken(extraClaims, userDetails, jwtExpiration);
         return buildToken(extraClaims, userDetails, 1000 * 60 * 60 * 10);
     }
 
+    // Xây dựng JWT
     private String buildToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails,
@@ -55,19 +60,23 @@ public class JwtService {
                 .compact();
     }
 
+    //  Kiểm tra xem JWT có hợp lệ không (không hết hạn và tên người dùng khớp).
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
+    //  Kiểm tra xem JWT có hết hạn không.
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
+    // Trích xuất thời gian hết hạn từ JWT.
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    // Trích xuất tất cả thông tin từ JWT.
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
@@ -77,6 +86,7 @@ public class JwtService {
                 .getBody();
     }
 
+    // Lấy key dùng để ký và xác thực JWT.
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);

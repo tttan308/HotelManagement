@@ -31,24 +31,33 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain)
     throws ServletException, IOException {
+        // Bỏ qua xác thực nếu là đăng nhập/đăng ký
         if (request.getServletPath().contains("/api/v1/auth")) {
             filterChain.doFilter(request, response);
             return;
         }
+
         final String authHeader = request.getHeader("Authorization");
-        System.out.println(authHeader);
         final String jwt;
         final String username;
-        if(authHeader == null && !authHeader.startsWith("Bearer ")) {
+
+        // Kiểm tra xem header Authorization có tồn tại hoặc có đúng định dạng không
+        // Nếu không tồn tại hoặc không đúng định dạng thì bỏ qua xác thực
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
+
         jwt = authHeader.substring(7);
         username = jwtService.extractUsername(jwt); // todo extract the username from jwt token
-        System.out.println(username);
 
+        // Đảm bảo username được trích xuất từ jwt token tồn tại
+        // và kiểm tra xem đã có thng tin xác thực trong spring security context chưa (nếu chưa có nghĩa là người dùng chưa đăng nhập`)
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            // load thông tin chi tiết của người dùng
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+            // Nếu jwt token hợp lệ thì thiết lập thông tin xác thực cho Spring Security
             if(jwtService.isTokenValid(jwt, userDetails)) {
                 // todo set the authentication in spring security context
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -57,12 +66,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         userDetails.getAuthorities()
                 );
 
+                // Thiết lập chi tiết xác thực bổ sung, như thông tin về IP và session từ yêu cầu HTTP.
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
+
+                // Thiết lập thông tin xác thực vào Spring Security Context
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
+
+        // Cho phép request đi tiếp
         filterChain.doFilter(request, response);
     }
 }

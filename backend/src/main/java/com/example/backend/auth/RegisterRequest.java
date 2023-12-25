@@ -1,5 +1,6 @@
 package com.example.backend.auth;
 
+import com.example.backend.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,6 @@ public class RegisterRequest {
     private String email;
     private String phoneNumber;
     private Date birthDay;
+    private String userImageId;
+    private Role role;
 }

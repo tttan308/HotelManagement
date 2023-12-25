@@ -20,15 +20,16 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
+    //cấu hình chi tiết cách bảo mật cho các yêu cầu HTTP
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**")
-                .permitAll()
+                .permitAll()//cho phép tất cả mọi người truy cập vào địa chỉ này
                 .anyRequest()
-                .authenticated()
+                .authenticated()//tất cả các request khác đều cần phải xác thực mới được truy cập
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
