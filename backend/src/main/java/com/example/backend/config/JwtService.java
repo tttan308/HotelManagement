@@ -1,5 +1,6 @@
 package com.example.backend.config;
 
+import com.example.backend.entity.UserAccount;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,6 +20,7 @@ public class JwtService {
 
     private static final String SECRET_KEY = "mdTrgvnTFRD4jrKWqLMu4OX+1Iuw7y4qpMzzUiVvVfpcu7YxFbzzkfez6AEJm1oH";
 
+    private long refreshExpiration = 604800000;
     //  Trích xuất tên người dùng (username) từ JWT.
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -92,4 +94,9 @@ public class JwtService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    public String generateRefreshToken(
+            UserDetails userDetails
+    ) {
+        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
+    }
 }

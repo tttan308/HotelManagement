@@ -1,9 +1,11 @@
 package com.example.backend.config;
 
+import com.example.backend.repository.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,14 +18,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
-
-    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
-        this.jwtService = jwtService;
-        this.userDetailsService = userDetailsService;
-    }
+    private final TokenRepository tokenRepository;
 
     @Override
     protected void doFilterInternal(
@@ -32,7 +31,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain)
     throws ServletException, IOException {
         // Bỏ qua xác thực nếu là đăng nhập/đăng ký
-        if (request.getServletPath().contains("/api/v1/auth")) {
+        if (request.getServletPath().contains("/api/v1/auth") || request.getServletPath().contains("/api/v1/rooms")) {
+            System.out.println("Bỏ qua xác thực nếu là đăng nhập/đăng ký");
             filterChain.doFilter(request, response);
             return;
         }
@@ -57,8 +57,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // load thông tin chi tiết của người dùng
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
+            var isTokenValid = tokenRepository.findByToken(jwt)
+                    .map(t -> !t.isExpired() && !t.isRevoked())
+                    .orElse(false);
+
             // Nếu jwt token hợp lệ thì thiết lập thông tin xác thực cho Spring Security
-            if(jwtService.isTokenValid(jwt, userDetails)) {
+            if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
                 // todo set the authentication in spring security context
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,

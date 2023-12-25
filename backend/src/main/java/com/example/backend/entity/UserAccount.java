@@ -37,6 +37,9 @@ public class UserAccount implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "userAccount")
+    private List<Token> tokens;
+
     public String getUsername() {
         return username;
     }
