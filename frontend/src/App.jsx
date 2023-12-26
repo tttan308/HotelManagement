@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
-import { Home, About, Service, Profile, RoomDetail } from "./pages";
+import { Home, About, Service, Profile, RoomDetail, Login, Signup } from "./pages";
 import Rooms from "./pages/Rooms";
 
 export default function App() {
@@ -14,6 +14,8 @@ export default function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/rooms' element={<Rooms />} />
           <Route path='/rooms/:id' element={<RoomDetail />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
         </Route>
       </Routes>
     </div>
