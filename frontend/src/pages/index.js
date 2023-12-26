@@ -1,5 +1,5 @@
 export { default as Home } from "./Home";
 export { default as About } from "./About";
 export { default as Service } from "./Service";
-
+export { default as RoomDetail } from "./RoomDetail";
 export { default as Profile } from "./Profile";
