@@ -32,10 +32,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     throws ServletException, IOException {
         // Bỏ qua xác thực nếu là đăng nhập/đăng ký
         if (request.getServletPath().contains("/api/v1/auth") || request.getServletPath().contains("/api/v1/rooms")) {
-            System.out.println("Bỏ qua xác thực nếu là đăng nhập/đăng ký");
             filterChain.doFilter(request, response);
             return;
         }
+
+        System.out.println("JwtAuthenticationFilter.doFilterInternal");
 
         final String authHeader = request.getHeader("Authorization");
         final String jwt;

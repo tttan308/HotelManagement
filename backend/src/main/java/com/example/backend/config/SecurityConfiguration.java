@@ -30,7 +30,7 @@ public class SecurityConfiguration {
     private final LogoutHandler logoutHandler;
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
-            "/api/v1/rooms/",
+            "/api/v1/rooms/**",
     };
 
     //cấu hình chi tiết cách bảo mật cho các yêu cầu HTTP
