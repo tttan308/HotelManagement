@@ -1,5 +1,6 @@
 import { faWifi, faBuildingCircleCheck, faUtensils, faWaterLadder, faHeartCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import RoomDetail from "./RoomDetail";
 import RoomCard from "../components/RoomCard";
 
 export default function Home() {

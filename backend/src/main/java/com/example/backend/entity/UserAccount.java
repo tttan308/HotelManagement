@@ -29,6 +29,7 @@ public class UserAccount implements UserDetails {
     private String name;
     private String email;
     private String phoneNumber;
+    private String address;
     private Date birthDay;
 
     // Một định danh cho hình ảnh đại diện của người dùng, có thể thay thế bằng URL hình ảnh
