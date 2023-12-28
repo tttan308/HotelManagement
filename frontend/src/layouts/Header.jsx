@@ -60,16 +60,16 @@ const Header = () => {
         </NavLink>
       </div>
       <div className="flex gap-4">
-        {/* <button className="bg-white text-main  font-semibold py-3 px-5 rounded-md">
+        <button className="bg-white text-main  font-semibold py-3 px-5 rounded-md">
           Đăng nhập
         </button>
         <button className="border-2 text-white  font-semibold py-3 px-6 rounded-md">
           Đăng ký
-        </button> */}
+        </button>
         <button className="bg-[#d9d9d9] rounded-full font-semibold w-12 h-12 flex items-center justify-center">
           <FontAwesomeIcon icon={faFacebookMessenger} size="lg" />
         </button>
-        {openProfile ? (
+        {/* {openProfile ? (
           <button
             onClick={() => setOpenProfile(false)}
             className="rounded-full bg-[#d9d9d9] font-semibold w-12 h-12 flex items-center justify-center"
@@ -83,9 +83,9 @@ const Header = () => {
           >
             <FontAwesomeIcon icon={faUser} size="lg" />
           </button>
-        )}
+        )} */}
       </div>
-      {openProfile && (
+      {/* {openProfile && (
         <div className="shadow-outer absolute right-8 top-20 bg-white rounded-lg z-10 px-4 pt-2 font-semibold">
           <div className="flex shadow-outer p-2 items-center gap-2 rounded-3xl">
             <div className="rounded-full bg-[#d9d9d9] font-semibold w-10 h-10 flex items-center justify-center">
@@ -104,7 +104,7 @@ const Header = () => {
             </Link>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

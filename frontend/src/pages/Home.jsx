@@ -6,7 +6,7 @@ import {
   faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RoomDetail from "../components/RoomDetail";
+import RoomDetail from "./RoomDetail";
 
 export default function Home() {
   const rooms = [
