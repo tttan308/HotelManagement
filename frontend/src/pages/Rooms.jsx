@@ -22,7 +22,11 @@ const Rooms = () => {
       price: "1.740.000",
       featured: ["2 phòng ngủ", "2 phòng tắm", "1 ban công"],
       utils: 2,
-      descriptions: ["Đang  thu hút nhiều lượt đặt, lần đặt gần nhất 1 giờ trước!", "Không cần thẻ tín dụng", "Giảm giá 10% cho lần đặt phòng đầu tiên"],
+      descriptions: [
+        "Đang  thu hút nhiều lượt đặt, lần đặt gần nhất 1 giờ trước!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
       discount: 13,
       reviewCount: 102,
       vote_average: 8.2,
@@ -38,7 +42,11 @@ const Rooms = () => {
       star: 4,
       featured: ["1 phòng ngủ", "1 phòng tắm", "1 ban công"],
       utils: 2,
-      descriptions: ["Cung cấp không gian phòng hiện đại, đầy đủ tiện nghi.!", "Không cần thẻ tín dụng", "Giảm giá 10% cho lần đặt phòng đầu tiên"],
+      descriptions: [
+        "Cung cấp không gian phòng hiện đại, đầy đủ tiện nghi.!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
       reviewCount: 120,
       discount: 13,
       vote_average: 7.9,
@@ -74,7 +82,11 @@ const Rooms = () => {
       price: "1.740.000",
       featured: ["2 phòng ngủ", "1 phòng tắm", "1 ban công"],
       utils: 4,
-      descriptions: ["Đang  thu hút nhiều lượt đặt, lần đặt gần nhất 1 giờ trước!", "Không cần thẻ tín dụng", "Giảm giá 10% cho lần đặt phòng đầu tiên"],
+      descriptions: [
+        "Đang  thu hút nhiều lượt đặt, lần đặt gần nhất 1 giờ trước!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
       discount: 13,
       reviewCount: 310,
       vote_average: 8.5,
@@ -91,7 +103,6 @@ const Rooms = () => {
       star: 3,
       featured: ["1 phòng ngủ", "1 phòng tắm"],
       utils: 2,
-      discount: 20,
       save: true,
       descriptions: [
         "Phòng tiêu chuẩn với các tiện nghi cơ bản, thích hợp cho những người muốn trải nghiệm thoải mái và tiện ích đơn giản!",
@@ -113,7 +124,11 @@ const Rooms = () => {
       featured: ["1 phòng ngủ", "1 phòng tắm", "1 view biển"],
       utils: 4,
       discount: 13,
-      descriptions: ["Phòng với giường lớn hơn so với giường đôi thông thường, tạo ra không gian thoải mái và sang trọng!", "Không cần thẻ tín dụng", "Giảm giá 10% cho lần đặt phòng đầu tiên"],
+      descriptions: [
+        "Phòng với giường lớn hơn so với giường đôi thông thường, tạo ra không gian thoải mái và sang trọng!",
+        "Không cần thẻ tín dụng",
+        "Giảm giá 10% cho lần đặt phòng đầu tiên",
+      ],
       reviewCount: 254,
       vote_average: 8.8,
     },
@@ -188,71 +203,98 @@ const Rooms = () => {
     }
   }
 
-  const roomType = ["Standard", "Family", "Deluxe", "Queen", "Presidential", "Double Room", "Room View"];
+  const roomType = [
+    "Standard",
+    "Family",
+    "Deluxe",
+    "Queen",
+    "Presidential",
+    "Double Room",
+    "Room View",
+  ];
   const capacity = [1, 2, 3, 4, 5];
 
   return (
-    <div onKeyDown={escFunction} className='w-4/5 max-w-screen-xl mx-auto relative'>
+    <div
+      onKeyDown={escFunction}
+      className="w-4/5 max-w-screen-xl mx-auto relative"
+    >
       {filtering ? (
-        <div className='fixed w-4/5 h-[500px] rounded-2xl bg-[#F5F5F5] bg-opacity-90 hover:shadow-lg hover:shadow-cyan-500/100 -translate-x-2/4 left-2/4'>
-          <button onClick={closeFiltering} className='p-2 bg-[#2E97A7] absolute -right-8 -top-8 rounded-full hover:bg-[#1AACAC]'>
-            <FaXbox size={20} className='text-white' />
+        <div className="fixed w-4/5 h-[500px] rounded-2xl bg-[#F5F5F5] bg-opacity-90 hover:shadow-lg hover:shadow-cyan-500/100 -translate-x-2/4 left-2/4">
+          <button
+            onClick={closeFiltering}
+            className="p-2 bg-[#2E97A7] absolute -right-8 -top-8 rounded-full hover:bg-[#1AACAC]"
+          >
+            <FaXbox size={20} className="text-white" />
           </button>
         </div>
       ) : null}
-      <h1 className='my-[20px] text-[40px] text-[#2E97A7] w-full text-center'>Danh sách phòng</h1>
-      <div className='filter w-full mb-[80px]'>
-        <div className='flex flex-row gap-x-16 justify-start items-center mb-4'>
-          <button onClick={handleClick} className='px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center'>
-            <FiFilter className='inline mr-1' />
+      <h1 className="my-[20px] text-[40px] text-[#2E97A7] w-full text-center">
+        Danh sách phòng
+      </h1>
+      <div className="filter w-full mb-[80px]">
+        <div className="flex flex-row gap-x-16 justify-start items-center mb-4">
+          <button
+            onClick={handleClick}
+            className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center"
+          >
+            <FiFilter className="inline mr-1" />
             Bộ lọc
           </button>
-          <div className='flex flex-row gap-x-4'>
-            <Filtering options={roomType} title='Loại phòng' />
-            <Filtering options={capacity} title='Số lượng người' />
-            <div className=''>
-              <button className='px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC]'>
+          <div className="flex flex-row gap-x-4">
+            <Filtering options={roomType} title="Loại phòng" />
+            <Filtering options={capacity} title="Số lượng người" />
+            <div className="">
+              <button className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC]">
                 Giá phòng
-                <FaCaretDown className='inline ml-1' />
+                <FaCaretDown className="inline ml-1" />
               </button>
               <div></div>
             </div>
           </div>
         </div>
         <div>
-          <button className='px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center'>
-            <RxDropdownMenu className='inline mr-1' />
+          <button className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center">
+            <RxDropdownMenu className="inline mr-1" />
             Xếp theo
           </button>
         </div>
       </div>
-      <div className='list-rooms w-full flex flex-col gap-y-10'>
+      <div className="list-rooms w-full flex flex-col gap-y-10">
         {rooms.map((room, index) => {
           return <RoomCard key={index} room={room} />;
         })}
       </div>
-      <div className='pagination w-full flex flex-row justify-center items-center gap-x-4 my-[50px]'>
+      <div className="pagination w-full flex flex-row justify-center items-center gap-x-4 my-[50px]">
         <button
           onClick={handlePagination}
           value={"prev"}
-          className='py-1 px-3 border-[1px] rounded-md border-[#2E97A7] flex flex-row justify-center items-center hover:bg-[#2E97A7] hover:text-white duration-300'
+          className="py-1 px-3 border-[1px] rounded-md border-[#2E97A7] flex flex-row justify-center items-center hover:bg-[#2E97A7] hover:text-white duration-300"
         >
-          <FaLongArrowAltLeft className='inline mr-2' />
+          <FaLongArrowAltLeft className="inline mr-2" />
           Back
         </button>
-        <button value={1} onClick={handlePagination} className='py-1 px-3 border-[1px] rounded-md border-[#2E97A7] hover:bg-[#2E97A7] hover:text-white duration-300'>
+        <button
+          value={1}
+          onClick={handlePagination}
+          className="py-1 px-3 border-[1px] rounded-md border-[#2E97A7] hover:bg-[#2E97A7] hover:text-white duration-300"
+        >
           1
         </button>
-        <button value={2} onClick={handlePagination} className='py-1 px-3 border-[1px] rounded-md border-[#2E97A7] hover:bg-[#2E97A7] hover:text-white duration-300'>
+        <button
+          value={2}
+          onClick={handlePagination}
+          className="py-1 px-3 border-[1px] rounded-md border-[#2E97A7] hover:bg-[#2E97A7] hover:text-white duration-300"
+        >
           2
         </button>
         <button
           onClick={handlePagination}
           value={"next"}
-          className='py-1 px-3 border-[1px] rounded-md border-[#2E97A7] flex flex-row justify-center items-center hover:bg-[#2E97A7] hover:text-white duration-300'
+          className="py-1 px-3 border-[1px] rounded-md border-[#2E97A7] flex flex-row justify-center items-center hover:bg-[#2E97A7] hover:text-white duration-300"
         >
           Next
-          <FaLongArrowAltRight className='inline ml-2' />
+          <FaLongArrowAltRight className="inline ml-2" />
         </button>
       </div>
     </div>
