@@ -1,26 +1,20 @@
 import React from "react";
 
-const Signup = () => {
-  const handleSignup = () => {
-    // Implement signup logic
-    console.log("Signup clicked");
+const Login = () => {
+  const handleGoogleLogin = () => {
+    // Implement Google login logic
+    console.log("Google login clicked");
+  };
+
+  const handleGitHubLogin = () => {
+    // Implement GitHub login logic
+    console.log("GitHub login clicked");
   };
 
   return (
     <div className='min-h-screen flex items-center justify-center'>
-      <div className='w-full max-w-md'>
+      <div className='w-full max-w-xs'>
         <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='fullName'>
-              Full Name
-            </label>
-            <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='fullName'
-              type='text'
-              placeholder='Full Name'
-            />
-          </div>
           <div className='mb-4'>
             <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='username'>
               Username
@@ -32,7 +26,7 @@ const Signup = () => {
               placeholder='Username'
             />
           </div>
-          <div className='mb-4'>
+          <div className='mb-6'>
             <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='password'>
               Password
             </label>
@@ -43,38 +37,25 @@ const Signup = () => {
               placeholder='******************'
             />
           </div>
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='email'>
-              Email
-            </label>
-            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='email' type='email' placeholder='Email' />
-          </div>
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='phone'>
-              Phone
-            </label>
-            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='phone' type='tel' placeholder='Phone' />
-          </div>
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='address'>
-              Address
-            </label>
-            <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              id='address'
-              type='text'
-              placeholder='Address'
-            />
-          </div>
-          <div className='mb-4'>
-            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='birthday'>
-              Birthday
-            </label>
-            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='birthday' type='date' />
-          </div>
           <div className='flex items-center justify-between'>
-            <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='button' onClick={handleSignup}>
-              Sign Up
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='button'>
+              Sign In
+            </button>
+          </div>
+
+          <div className='mt-4'>
+            you don't have an account?{" "}
+            <a href='/signup' className='text-blue-600 dark:text-blue-500 hover:underline'>
+              signup
+            </a>
+          </div>
+
+          <div className='mt-4 flex flex-col justify-center gap-2'>
+            <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ' type='button' onClick={handleGoogleLogin}>
+              Sign In with Google
+            </button>
+            <button className='bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='button' onClick={handleGitHubLogin}>
+              Sign In with GitHub
             </button>
           </div>
         </form>
@@ -82,5 +63,4 @@ const Signup = () => {
     </div>
   );
 };
-
-export default Signup;
+export default Login;
