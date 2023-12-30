@@ -728,6 +728,7 @@ const Rooms = () => {
     },
   ];
   const [filteredItems, setFilterdItems] = useState(data);
+  const [filterBox, setFitlerBox] = useState(false);
   let currentPage = 1;
   let recordsPerPage = 4;
   let maxIndexOfRecord = Math.ceil(filteredItems.length / recordsPerPage);
@@ -878,14 +879,28 @@ const Rooms = () => {
     setRooms(array.slice(indexFirst, indexLast));
   }
 
+  function openFilterBox() {
+    setFitlerBox(!filterBox);
+  }
+  
   return (
     <div className="w-4/5 max-w-screen-xl mx-auto relative">
-      {false ? (
-        <div className="fixed w-4/5 h-[500px] rounded-2xl bg-[#F5F5F5] bg-opacity-90 hover:shadow-lg hover:shadow-cyan-500/100 -translate-x-2/4 left-2/4 z-50">
-          <button className="p-2 bg-[#2E97A7] absolute -right-8 -top-8 rounded-full hover:bg-[#1AACAC]">
+      {filterBox ? (
+        <div className="fixed w-4/5 h-[500px] rounded-2xl bg-[#F5F5F5] bg-opacity-90 hover:shadow-lg hover:shadow-cyan-500/100 -translate-x-2/4 left-2/4 z-50 flex flex-col">
+          <button className="p-2 bg-[#2E97A7] absolute -right-8 -top-8 rounded-full hover:bg-[#1AACAC]"
+            onClick={openFilterBox}
+          >
             <FaXbox size={20} className="text-white" />
           </button>
-          <div></div>
+          <div>
+            <h1>Loại phòng</h1>
+          </div>
+          <div>
+            <h1>Số lượng khách hàng</h1>
+          </div>
+          <div>
+            <h1>Giá phòng</h1>
+          </div>
         </div>
       ) : null}
 
@@ -910,7 +925,9 @@ const Rooms = () => {
           </label>
         </div>
         <div className="flex flex-row gap-x-16 justify-start items-center mb-4">
-          <button className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center">
+          <button className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center"
+            onClick={openFilterBox}
+          >
             <FiFilter className="inline mr-1" />
             Bộ lọc
           </button>
