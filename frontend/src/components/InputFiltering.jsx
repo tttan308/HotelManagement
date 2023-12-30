@@ -5,10 +5,21 @@ const InputFiltering = (props) => {
   const [checked, setChecked] = useState(false);
 
   const style="p-1 rounded-md mx-2 bg-[#1AACAC] border-[1px] text-white hover:cursor-pointer"
-  function handleClick(event) {
+  function handleChange(event) {
     if(event.target.checked)  
+    {
       setChecked(true);
-    else  setChecked(false);
+      props.changeSelect(prev => {
+        return (prev.add(event.target.value));
+      })
+    }
+    else  {
+      setChecked(false);
+      props.changeSelect(prev => {
+        prev.delete(event.target.value);
+        return prev;
+      })
+    }
   }
   
   return (
@@ -19,7 +30,7 @@ const InputFiltering = (props) => {
       >
         {option}
       </label>
-      <input onClick={handleClick} className="w-0" id={option} type="checkbox" value={option} />
+      <input onChange={handleChange} className="w-0" id={option} type="checkbox" value={option} />
     </div>
   );
 };
