@@ -19,7 +19,7 @@ const Rooms = () => {
       star: 3,
       saving: true,
       basePrice: 2000000,
-      salePrice: 1740000,
+      salePrice: 2500000,
       featured: ["2 phòng ngủ", "2 phòng tắm", "1 ban công"],
       descriptions: [
         "Đang  thu hút nhiều lượt đặt, lần đặt gần nhất 1 giờ trước!",
@@ -727,22 +727,15 @@ const Rooms = () => {
       vote_average: 8.2,
     },
   ];
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(4);
   const [filteredItems, setFilterdItems] = useState(data);
-  const [maxIndexOfRecord, setMaxIndexOfRecord] = useState(
-    Math.ceil(filteredItems.length / recordsPerPage)
-  );
-  const [indexOfLastRecord, setIndexOfLastRecord] = useState(
-    currentPage * recordsPerPage
-  );
-  const [indexOfFirstRecord, setIndexOfFirstRecord] = useState(
-    indexOfLastRecord - recordsPerPage
-  );
-  const [rangePrice, setRangePrice] = useState(0);
-  const [rooms, setRooms] = useState(
-    filteredItems.slice(indexOfFirstRecord, indexOfLastRecord)
-  );
+  let currentPage = 1;
+  let recordsPerPage = 4;
+  let maxIndexOfRecord = Math.ceil(filteredItems.length / recordsPerPage);
+  const [rangePrice, setRangePrice] = useState(null);
+  const indexLast = recordsPerPage;
+  const indexFirst = indexLast - recordsPerPage;
+  const [rooms, setRooms] = useState(data.slice(indexFirst, indexLast));
+  const [openSortBy, setOpenSortBy] = useState(false);
 
   /* Lấy ra toàn bộ thông tin về loại phòng, giá cơ bản, giá đã sale và số lượng người có thể ở trong phòng. */
   const roomType = [...new Set(data.map((room) => room.roomType))];
@@ -810,15 +803,11 @@ const Rooms = () => {
       });
       setRangePrice(null);
     }
-
-
     setFilterdItems(filterItems);
-    setMaxIndexOfRecord(Math.ceil(filterItems.length / recordsPerPage));
-    setCurrentPage(1);
+    maxIndexOfRecord = Math.ceil(filterItems.length / recordsPerPage);
+    currentPage = 1;
     let indexLast = recordsPerPage;
     let indexFirst = indexLast - recordsPerPage;
-    setIndexOfLastRecord(indexLast);
-    setIndexOfFirstRecord(indexFirst);
     setRooms(filterItems.slice(indexFirst, indexLast));
   }
 
@@ -842,11 +831,9 @@ const Rooms = () => {
         current = currentPage;
       }
     }
-    setCurrentPage(current);
+    currentPage = current;
     let indexLast = current * recordsPerPage;
     let indexFirst = indexLast - recordsPerPage;
-    setIndexOfLastRecord(indexLast);
-    setIndexOfFirstRecord(indexFirst);
     setRooms(filteredItems.slice(indexFirst, indexLast));
   }
 
@@ -860,9 +847,35 @@ const Rooms = () => {
     setFilterdItems(_rooms);
     let indexLast = recordsPerPage;
     let indexFirst = indexLast - recordsPerPage;
-    setIndexOfFirstRecord(indexFirst);
-    setIndexOfLastRecord(indexLast);
     setRooms(_rooms.slice(indexFirst, indexLast));
+  }
+
+  function handleSortBy() {
+    setOpenSortBy(!openSortBy);
+  }
+
+  function SortByPriceAsc() {
+    let array = filteredItems;
+    array = array.sort((a, b) => {
+      return a.salePrice - b.salePrice;
+    });
+    setFilterdItems(array);
+    currentPage = 1;
+    let indexLast = recordsPerPage;
+    let indexFirst = indexLast - recordsPerPage;
+    setRooms(array.slice(indexFirst, indexLast));
+  }
+
+  function SortByPriceDesc() {
+    let array = filteredItems;
+    array = array.sort((a, b) => {
+      return (a.salePrice - b.salePrice) * -1;
+    });
+    setFilterdItems(array);
+    currentPage = 1;
+    let indexLast = recordsPerPage;
+    let indexFirst = indexLast - recordsPerPage;
+    setRooms(array.slice(indexFirst, indexLast));
   }
 
   return (
@@ -1068,20 +1081,27 @@ const Rooms = () => {
             <div className="inline-block hover:cursor-pointer relative">
               <button
                 className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center"
-                onClick={chooseFilterProperty}
-                value={4}
+                onClick={handleSortBy}
               >
                 <RxDropdownMenu className="inline mr-1" />
                 Xếp theo
               </button>
-              <div className="hidden  flex-col gap-y-2 absolute top-full border-none mt-2 shadow-2xl p-2 rounded-xl w-[200px] px-2">
-                <p className="hover:cursor-pointer hover:bg-gray-100 w-full h-full rounded-md">
-                  Giá: Thấp ↑ Cao
-                </p>
-                <p className="hover:cursor-pointer hover:bg-gray-100 w-full h-full rounded-md">
-                  Giá: Cao ↓ Thấp
-                </p>
-              </div>
+              {openSortBy ? (
+                <div className="flex-col gap-y-2 absolute top-full border-none mt-2 shadow-2xl p-2 rounded-xl w-[200px] px-2">
+                  <button
+                    className="hover:cursor-pointer hover:bg-gray-100 w-full h-full rounded-md"
+                    onClick={SortByPriceAsc}
+                  >
+                    Giá: Thấp ↑ Cao
+                  </button>
+                  <button
+                    className="hover:cursor-pointer hover:bg-gray-100 w-full h-full rounded-md"
+                    onClick={SortByPriceDesc}
+                  >
+                    Giá: Cao ↓ Thấp
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
