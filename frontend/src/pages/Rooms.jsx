@@ -808,7 +808,9 @@ const Rooms = () => {
       filterItems = filterItems.filter(({ salePrice }) => {
         return salePrice <= rangePrice;
       });
+      setRangePrice(null);
     }
+
 
     setFilterdItems(filterItems);
     setMaxIndexOfRecord(Math.ceil(filterItems.length / recordsPerPage));
@@ -879,7 +881,7 @@ const Rooms = () => {
       </h1>
       <div className="filter w-full mb-[80px]">
         {/* Lọc phòng theo dữ liệu người dùng nhập vào. --> Xong */}
-        <div className="mb-4 relative w-[200px] z-0">
+        <div className="mb-4 relative w-[200px]">
           <input
             type="text"
             id="floating_standard"
@@ -915,7 +917,7 @@ const Rooms = () => {
                 className={
                   filterProp !== "1"
                     ? "hidden"
-                    : "w-[700px] h-[110px] absolute top-full shadow-lg shadow-slate-600/50 mt-4 rounded-md"
+                    : "w-[700px] h-[110px] absolute top-full shadow-lg shadow-slate-600/50 mt-4 rounded-md bg-[#F6F6F6]"
                 }
               >
                 <div className=" w-full gap-x-3 gap-y-2 h-3/5 bg-slate-100">
@@ -960,7 +962,7 @@ const Rooms = () => {
                 className={
                   filterProp !== "2"
                     ? "hidden"
-                    : "w-[700px] h-[110px] absolute top-full shadow-lg shadow-slate-600/50 mt-4 rounded-md"
+                    : "w-[700px] h-[110px] absolute top-full shadow-lg shadow-slate-600/50 bg-[#F6F6F6] mt-4 rounded-md"
                 }
               >
                 <div className=" w-full gap-x-3 gap-y-2 h-3/5 bg-slate-100">
@@ -1005,11 +1007,11 @@ const Rooms = () => {
                 className={
                   filterProp !== "3"
                     ? "hidden"
-                    : "w-[700px] h-[120px] top-full shadow-lg shadow-slate-600/50 mt-3 rounded-md absolute px-4"
+                    : "w-[700px] h-[120px] top-full shadow-lg shadow-slate-600/50 mt-3 rounded-md absolute px-4 bg-[#F6F6F6]"
                 }
               >
                 <div>
-                  <p>Dưới {rangePrice.toLocaleString()} VNĐ</p>
+                  <p>Dưới {rangePrice?.toLocaleString()} VNĐ</p>
                 </div>
                 <div className="relative mb-6">
                   <label for="labels-range-input" className="sr-only">
@@ -1072,7 +1074,7 @@ const Rooms = () => {
                 <RxDropdownMenu className="inline mr-1" />
                 Xếp theo
               </button>
-              <div className="flex flex-col gap-y-2 absolute top-full border-none mt-2 shadow-2xl p-2 rounded-xl w-[200px] px-2">
+              <div className="hidden  flex-col gap-y-2 absolute top-full border-none mt-2 shadow-2xl p-2 rounded-xl w-[200px] px-2">
                 <p className="hover:cursor-pointer hover:bg-gray-100 w-full h-full rounded-md">
                   Giá: Thấp ↑ Cao
                 </p>
