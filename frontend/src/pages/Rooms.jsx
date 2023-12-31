@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiFilter } from "react-icons/fi";
-import { RxDropdownMenu } from "react-icons/rx";
+import { RxDropdownMenu, RxZoomOut } from "react-icons/rx";
 import RoomDetail from "../components/RoomDetail";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { FaCaretDown } from "react-icons/fa";
@@ -810,6 +810,7 @@ const Rooms = () => {
     let indexLast = recordsPerPage;
     let indexFirst = indexLast - recordsPerPage;
     setRooms(filterItems.slice(indexFirst, indexLast));
+    setFitlerBox(false);
   }
 
   function pagination(event) {
@@ -882,24 +883,94 @@ const Rooms = () => {
   function openFilterBox() {
     setFitlerBox(!filterBox);
   }
-  
+
   return (
     <div className="w-4/5 max-w-screen-xl mx-auto relative">
       {filterBox ? (
-        <div className="fixed w-4/5 h-[500px] rounded-2xl bg-[#F5F5F5] bg-opacity-90 hover:shadow-lg hover:shadow-cyan-500/100 -translate-x-2/4 left-2/4 z-50 flex flex-col">
-          <button className="p-2 bg-[#2E97A7] absolute -right-8 -top-8 rounded-full hover:bg-[#1AACAC]"
+        <div className="fixed w-4/5 rounded-2xl bg-[#F5F5F5] bg-opacity-90 hover:shadow-lg hover:shadow-cyan-500/100 -translate-x-2/4 left-2/4 z-50 flex flex-col gap-y-8 p-4">
+          <button
+            className="p-2 bg-[#2E97A7] absolute -right-8 -top-8 rounded-full hover:bg-[#1AACAC]"
             onClick={openFilterBox}
           >
             <FaXbox size={20} className="text-white" />
           </button>
-          <div>
-            <h1>Loại phòng</h1>
+          <div className="px-4">
+            <h1 className="text-[#2E97A7] text-xl font-semibold mb-2">
+              Loại phòng
+            </h1>
+            <div className="flex flex-row flex-wrap gap-x-4">
+              {roomType.map((room) => {
+                return (
+                  <InputFiltering key={Math.random()} option={room} changeSelect={setRoomTypeSelected} />
+                );
+              })}
+            </div>
+            <div className="w-full h-[1px] bg-[#1AACAC] mt-12"></div>
           </div>
-          <div>
-            <h1>Số lượng khách hàng</h1>
+          <div className="px-4 w-full">
+            <h1 className="text-[#2E97A7] text-xl font-semibold mb-2">
+              Số lượng khách hàng
+            </h1>
+            <div className="flex flex-row flex-wrap gap-x-4">
+              {capacity.map((element) => {
+                return (
+                  <InputFiltering key={Math.random()} option={element} changeSelect={setCapacitySelected} />
+                );
+              })}
+            </div>
+            <div className="w-full h-[1px] bg-[#1AACAC] mt-12"></div>
           </div>
-          <div>
-            <h1>Giá phòng</h1>
+          <div className="px-4">
+            <h1 className="text-[#2E97A7] text-xl font-semibold mb-2">
+              Giá phòng
+            </h1>
+            <div>
+              <div className="ml-[12.5%]">
+                <p>Dưới {rangePrice?.toLocaleString()} VNĐ</p>
+              </div>
+              <div className="relative mb-6 w-3/4 mx-auto">
+                <label for="labels-range-input" className="sr-only">
+                  Labels range
+                </label>
+                <input
+                  id="labels-range-input"
+                  type="range"
+                  min="0"
+                  defaultValue={"5000000"}
+                  max="5000000"
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                  value={rangePrice}
+                  onInput={handleInputChange}
+                />
+                <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">
+                  0 VNĐ
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-[20%] -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
+                  1.000.000 VNĐ
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-[40%] -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
+                  2.000.000 VNĐ
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-[60%] -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
+                  3.000.000 VNĐ
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-[80%] -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">
+                  4.000.000 VNĐ
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">
+                  5.000.000 VNĐ
+                </span>
+              </div>
+            </div>
+            <div className="w-full h-[1px] bg-[#1AACAC] mt-12"></div>
+          </div>
+          <div className="w-full flex flex-row justify-center items-center gap-x-4">
+            <button className="px-2 py-1 border-[1px] border-[#1AACAC] rounded-md font-semibold"
+              onClick={openFilterBox}
+            >Huỷ</button>
+            <button className="px-2 py-1 border-[1px] border-[#1AACAC] rounded-md font-semibold text-white bg-[#1AACAC]"
+            onClick={FilterItems}
+            >Xem kết quả</button>
           </div>
         </div>
       ) : null}
@@ -925,7 +996,8 @@ const Rooms = () => {
           </label>
         </div>
         <div className="flex flex-row gap-x-16 justify-start items-center mb-4">
-          <button className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center"
+          <button
+            className="px-2 py-1 rounded-2xl border-[1px] border-[#1AACAC] flex flex-row items-center"
             onClick={openFilterBox}
           >
             <FiFilter className="inline mr-1" />

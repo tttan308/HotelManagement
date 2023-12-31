@@ -4,7 +4,7 @@ const InputFiltering = (props) => {
   const option = props.option;
   const [checked, setChecked] = useState(false);
 
-  const style="p-1 rounded-md mx-2 bg-[#1AACAC] border-[1px] text-white hover:cursor-pointer"
+  const style="px-2 py-1 rounded-md mx-2 bg-[#1AACAC] border-[1px] text-white hover:cursor-pointer"
   function handleChange(event) {
     if(event.target.checked)  
     {
@@ -25,7 +25,7 @@ const InputFiltering = (props) => {
   return (
     <div className="inline-block mt-[1%] group">
       <label
-        className={checked? style: "p-1 border-[1px] border-[#1AACAC] rounded-md mx-2 hover:cursor-pointer"}
+        className={checked? style: "px-2 py-1 border-[1px] border-[#1AACAC] rounded-md mx-2 hover:cursor-pointer"}
         for={option}
       >
         {option}
