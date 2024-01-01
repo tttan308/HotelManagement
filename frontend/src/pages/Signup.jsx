@@ -1,13 +1,36 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { apiRegister } from "../api/";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    if (data.password !== data.confirmPassword) return;
+    delete data.confirmPassword;
+    console.log(data);
+    const response = await apiRegister(data);
+
+    if (response.access_token) {
+      let localStorageData = window.localStorage.getItem(
+        "persist:hotelmanagement/user"
+      );
+      localStorageData = JSON.parse(localStorageData);
+      if (!localStorageData) localStorageData = {};
+      localStorageData.token = JSON.stringify(response.access_token);
+      window.localStorage.setItem(
+        "persist:hotelmanagement/user",
+        JSON.stringify(localStorageData)
+      );
+      navigate("/");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -57,6 +80,21 @@ const Signup = () => {
               {...register("password", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
+              type="password"
+              placeholder="******************"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            </label>
+            <input
+              {...register("confirmPassword", { required: true })}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="confirmPassword"
               type="password"
               placeholder="******************"
             />
