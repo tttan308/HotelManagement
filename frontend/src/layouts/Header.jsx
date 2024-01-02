@@ -1,11 +1,33 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookMessenger } from "@fortawesome/free-brands-svg-icons";
 import { faUser, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [openProfile, setOpenProfile] = useState(false);
+  let localStorageData = window.localStorage.getItem(
+    "persist:hotelmanagement/user"
+  );
+  localStorageData = JSON.parse(localStorageData);
+  const token = localStorageData?.token;
+
+  const logout = () => {
+    setOpenProfile(false);
+    let localStorageData = window.localStorage.getItem(
+      "persist:hotelmanagement/user"
+    );
+    localStorageData = JSON.parse(localStorageData);
+    if (!localStorageData) localStorageData = {};
+    localStorageData.token = null;
+    window.localStorage.setItem(
+      "persist:hotelmanagement/user",
+      JSON.stringify(localStorageData)
+    );
+
+    navigate("/login");
+  };
 
   return (
     <div className="h-[80px] bg-main flex justify-between items-center px-8">
@@ -60,29 +82,42 @@ const Header = () => {
         </NavLink>
       </div>
       <div className="flex gap-4">
-        {/* <button className="bg-white text-main  font-semibold py-3 px-5 rounded-md">
-          Đăng nhập
-        </button>
-        <button className="border-2 text-white  font-semibold py-3 px-6 rounded-md">
-          Đăng ký
-        </button> */}
-        <button className="bg-[#d9d9d9] rounded-full font-semibold w-12 h-12 flex items-center justify-center">
-          <FontAwesomeIcon icon={faFacebookMessenger} size="lg" />
-        </button>
-        {openProfile ? (
-          <button
-            onClick={() => setOpenProfile(false)}
-            className="rounded-full bg-[#d9d9d9] font-semibold w-12 h-12 flex items-center justify-center"
-          >
-            <FontAwesomeIcon icon={faXmark} size="xl" />
-          </button>
+        {token ? (
+          <>
+            <button className="bg-[#d9d9d9] rounded-full font-semibold w-12 h-12 flex items-center justify-center">
+              <FontAwesomeIcon icon={faFacebookMessenger} size="lg" />
+            </button>
+            {openProfile ? (
+              <button
+                onClick={() => setOpenProfile(false)}
+                className="rounded-full bg-[#d9d9d9] font-semibold w-12 h-12 flex items-center justify-center"
+              >
+                <FontAwesomeIcon icon={faXmark} size="xl" />
+              </button>
+            ) : (
+              <button
+                onClick={() => setOpenProfile(true)}
+                className="rounded-full bg-[#d9d9d9] font-semibold w-12 h-12 flex items-center justify-center"
+              >
+                <FontAwesomeIcon icon={faUser} size="lg" />
+              </button>
+            )}{" "}
+          </>
         ) : (
-          <button
-            onClick={() => setOpenProfile(true)}
-            className="rounded-full bg-[#d9d9d9] font-semibold w-12 h-12 flex items-center justify-center"
-          >
-            <FontAwesomeIcon icon={faUser} size="lg" />
-          </button>
+          <>
+            <Link
+              to="/login"
+              className="bg-white text-main  font-semibold py-3 px-5 rounded-md"
+            >
+              Đăng nhập
+            </Link>
+            <Link
+              to="/signup"
+              className="border-2 text-white  font-semibold py-3 px-6 rounded-md"
+            >
+              Đăng ký
+            </Link>
+          </>
         )}
       </div>
       {openProfile && (
@@ -102,6 +137,9 @@ const Header = () => {
             <Link to="/service" onClick={() => setOpenProfile(false)}>
               Dịch vụ phòng
             </Link>
+            <button className="text-left" onClick={() => logout()}>
+              Đăng xuất
+            </button>
           </div>
         </div>
       )}
@@ -109,6 +147,4 @@ const Header = () => {
   );
 };
 
-
 export default Header;
-

@@ -2,6 +2,7 @@ package com.example.backend.config;
 
 import jakarta.servlet.Filter;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +31,7 @@ public class SecurityConfiguration {
     private final LogoutHandler logoutHandler;
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
-            "/api/v1/rooms/",
+            "/api/v1/rooms/**",
     };
 
     //cấu hình chi tiết cách bảo mật cho các yêu cầu HTTP
@@ -38,6 +39,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL).permitAll()
                                 .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())

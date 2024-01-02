@@ -6,7 +6,8 @@ import {
   faHeartCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RoomDetail from "../components/RoomDetail";
+import RoomDetail from "./RoomDetail";
+import RoomCard from "../components/RoomCard";
 
 export default function Home() {
   const rooms = [
@@ -184,7 +185,7 @@ export default function Home() {
         <div className="flex gap-10 mt-10 flex-col">
           {rooms.map((r, i) => (
             <div className="mx-auto w-[90%]" key={i}>
-              <RoomDetail room={r} />
+              <RoomCard room={r} />
             </div>
           ))}
         </div>
