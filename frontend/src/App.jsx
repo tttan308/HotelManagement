@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
-import { Home, About, Service, Profile, RoomDetail, Login, Signup } from "./pages";
-import Rooms from "./pages/Rooms";
+import { Home, About, Service, Profile, RoomDetail, Login, Signup, Rooms } from "./pages";
 
 export default function App() {
   return (
