@@ -39,19 +39,20 @@ const Signup = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
+        <h1 className="text-center text-2xl font-bold mb-4">Đăng ký</h1>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="fullName"
             >
-              Full Name
+              Họ tên
             </label>
             <input
               {...register("name", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="fullName"
               type="text"
-              placeholder="Full Name"
+              placeholder="Họ tên"
             />
           </div>
           <div className="mb-4">
@@ -59,14 +60,14 @@ const Signup = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="username"
             >
-              Username
+              Tên đăng nhập
             </label>
             <input
               {...register("username", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               type="text"
-              placeholder="Username"
+              placeholder="Tên đăng nhập"
             />
           </div>
           <div className="mb-4">
@@ -74,14 +75,14 @@ const Signup = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="password"
             >
-              Password
+              Mật khẩu
             </label>
             <input
               {...register("password", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              placeholder="******************"
+              placeholder="Mật khẩu"
             />
           </div>
           <div className="mb-4">
@@ -89,14 +90,14 @@ const Signup = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="confirmPassword"
             >
-              Confirm Password
+              Xác nhận mật khẩu
             </label>
             <input
               {...register("confirmPassword", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="confirmPassword"
               type="password"
-              placeholder="******************"
+              placeholder="Xác nhận mật khẩu"
             />
           </div>
           <div className="mb-4">
@@ -119,14 +120,14 @@ const Signup = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="phone"
             >
-              Phone
+              Số điện thoại
             </label>
             <input
               {...register("phoneNumber", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="phone"
               type="tel"
-              placeholder="Phone"
+              placeholder="Số điện thoại"
             />
           </div>
           <div className="mb-4">
@@ -134,14 +135,14 @@ const Signup = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="address"
             >
-              Address
+              Địa chỉ
             </label>
             <input
               {...register("address", { required: true })}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="address"
               type="text"
-              placeholder="Address"
+              placeholder="Địa chỉ"
             />
           </div>
           <div className="mb-4">
@@ -149,7 +150,7 @@ const Signup = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="birthday"
             >
-              Birthday
+              Ngày sinh
             </label>
             <input
               {...register("birthDay", { required: true })}
@@ -158,7 +159,7 @@ const Signup = () => {
               type="date"
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center">
             <input
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"

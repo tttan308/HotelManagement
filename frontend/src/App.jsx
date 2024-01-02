@@ -1,10 +1,41 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useEffect, useState } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
-import { Home, About, Service, Profile, RoomDetail, Login, Signup, Rooms } from "./pages";
+import { TailSpin } from 'react-loader-spinner';
+import { Home, About, Service, Profile, RoomDetail, Login, Signup } from "./pages";
+import Rooms from "./pages/Rooms";
 
 export default function App() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [location]);
+
   return (
     <div>
+      {loading && (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}>
+          <TailSpin
+            type="TailSpin"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={500} //3 secs
+          />
+        </div>
+      )}
+
       <Routes>
         <Route path='/' element={<PublicLayout />}>
           <Route path='/' element={<Home />} />
