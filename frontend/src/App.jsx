@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
-// import { Home, About} from "./pages";
-import Rooms from "./pages/Rooms";
+import { Home, About, Service, Profile, Rooms } from "./pages";
 
 export default function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<PublicLayout />}>
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} /> */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/rooms" element={<Rooms />} />
         </Route>
       </Routes>
