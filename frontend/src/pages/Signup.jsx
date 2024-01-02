@@ -14,7 +14,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) return;
     delete data.confirmPassword;
-    console.log(data);
+    data.role = "CUSTOMER";
     const response = await apiRegister(data);
 
     if (response.access_token) {

@@ -27,9 +27,8 @@ public class Room {
     public Room() {
     }
 
-    public Room(String roomName, RoomType roomType, String status, String roomImageId, String cleaningStatus, List<String> features) {
+    public Room(String roomName, String status, String roomImageId, String cleaningStatus, List<String> features) {
         this.roomName = roomName;
-        this.roomType = roomType;
         this.status = status;
         this.roomImageId = roomImageId;
         this.cleaningStatus = cleaningStatus;
