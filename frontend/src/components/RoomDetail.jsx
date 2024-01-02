@@ -1,57 +1,56 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { MdFlag } from "react-icons/md";
 import { FaCreditCard } from "react-icons/fa6";
 import { BsFillTagsFill } from "react-icons/bs";
 import { TbHandClick } from "react-icons/tb";
-import { IoChatbubbleSharp } from "react-icons/io5";
 import { TbArrowBigDownFilled } from "react-icons/tb";
+import { MdEventAvailable } from "react-icons/md";
+import { MdOutlineFreeCancellation } from "react-icons/md";
 
 const RoomDetail = (props) => {
   const room = props.room; // Biến lưu thông tin của phòng.
-  const featured = room.featured;
-  const subFeatured = featured.slice(0, 3);
-  const utils = featured.length - subFeatured.length;
-  const star = [];
-  for (let index = 0; index < room.star; index++) {
-    star.push(index);
-  }
-  const voteAvg = room.vote_average;
-  const classify = voteAvg < 8 ? "Khá" : voteAvg < 9 ? "Tốt" : "Thượng hạng";
-
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
+  const features = room.features;
+  const subFeatured = features.slice(0, 3);
+  const utils = features.length - subFeatured.length;
+  const booked = room.status.toLowerCase() === "đã được đặt";
+  if (room.salePrice < room.basePrice) {
+    room.saving = true;
+    room.discount = ((room.basePrice - room.salePrice) / room.basePrice) * 100;
+  } else room.saving = false;
 
   const basePriceString = room.basePrice.toLocaleString();
   const salePriceString = room.salePrice.toLocaleString();
 
+  const exist = [];
+  function randomEmoji() {
+    let index = -1;
+    index = Math.ceil(Math.random() * 3);
+    while (exist.includes(index)) index = Math.ceil(Math.random() * 3);
+    exist.push(index);
+    if (index == 1) return <MdFlag className="inline mr-2" />;
+    else if (index == 2) return <FaCreditCard className="inline mr-2" />;
+    else return <BsFillTagsFill className="inline mr-2" />;
+  }
+
   return (
-    <div className="w-full h-[300px] shadow-lg shadow-slate-400/100 rounded-2xl hover:cursor-pointer duration-300 flex flex-row">
+    <div className="w-full lg:h-[300px] shadow-lg shadow-slate-400/100 rounded-2xl flex flex-row">
       <img
-        src={room.src}
+        src={room.roomImage == null ? "https://plus.unsplash.com/premium_photo-1675615667752-2ccda7042e7e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHJvb21zfGVufDB8fDB8fHww": null}
         className="basis-2/5 h-full object-cover rounded-l-2xl"
       />
-      <div className="p-4 basis-2/5 h-ful flex flex-col items-start justify-around">
-        <p className="text-[24px]">
-          <span className="font-bold text-[#1AACAC]">( </span> 2023
-          <span className="font-bold text-[#1AACAC]">) </span> {room.name}
+      <div className="px-2 py-1 basis-2/5 h-ful flex flex-col items-start justify-around">
+        <p className="text-[28px] font-bold text-center w-full text-[#2E97A7]">
+          {room.roomName}
         </p>
-        <div className="flex flex-row gap-x-2">
-          {star.map((element, index) => {
-            return <FaStar size={24} key={index} className="text-[#1AACAC]" />;
-          })}
-        </div>
-        <p>Phòng này cung cấp:</p>
         <div className="flex flex-row w-full">
           <div className="flex flex-row basis-3/4 gap-x-2">
             {/* Danh sách 3 dịch vụ đầu tiên mà phòng cung cấp */}
-            {featured.map((element, index) => {
+            {subFeatured.map((element, index) => {
               return (
                 <p
                   key={index}
-                  className="px-2 py-1 text-sm rounded-xl border-[1px] border-[#1AACAC]"
+                  className="px-2 py-1 text-sm rounded-md border-[1px] border-[#1AACAC]"
                 >
                   {element}
                 </p>
@@ -64,25 +63,55 @@ const RoomDetail = (props) => {
             </p>
           </div>
         </div>
-        <div className="text-sm text-[#362FD9] font-bold">
-          <MdFlag className="inline mr-2" />
-          {room.descriptions[0]}
+        <div className="flex flex-col justify-around lg:h-2/4 overflow-x-hidden scroll-smooth scrollbar-hide">
+          {room.descriptions[0] && (
+            <div className="text-sm text-[#362FD9] font-bold">
+              {randomEmoji()}
+              {room.descriptions[0]}
+            </div>
+          )}
+          {room.descriptions[1] && (
+            <div className="text-sm text-[#362FD9] font-bold">
+              {randomEmoji()}
+              {room.descriptions[1]}
+            </div>
+          )}
+          {room.descriptions[2] && (
+            <div className="text-sm text-[#DD2525] font-bold">
+              {randomEmoji()}
+              {room.descriptions[2]}
+            </div>
+          )}
         </div>
-        <div className="text-sm text-[#362FD9] font-bold">
-          <FaCreditCard className="inline mr-2" />
-          {room.descriptions[1]}
-        </div>
-        <div className="text-sm text-[#DD2525] font-bold">
-          <BsFillTagsFill className="inline mr-2" />
-          {room.descriptions[2]}
-        </div>
-        <Link
-          className="text-[#1AACAC] font-semibold text-2xl flex flex-row items-center hover:text-[#2E97A7] duration-300"
-          to={`/detail/${room.id}`}
-        >
-          <TbHandClick className="inline" />
-          Xem phòng ngay
-        </Link>
+        {!booked ? (
+          <div className="w-full flex flex-row justify-around pt-1 border-t-[1px] ">
+            <div className="text-2xl font-semibold text-[#362FD9] flex flex-row items-center justify-center gap-x-1">
+              <MdEventAvailable />
+              <p>{room.status}</p>
+            </div>
+            <Link
+              className="relative text-[#1AACAC] font-semibold text-2xl flex flex-row items-center hover:text duration-300 room-detail px-2 py-1"
+              to={`/detail/${room.id}`}
+            >
+              <TbHandClick className="inline" />
+              Xem phòng ngay
+            </Link>
+          </div>
+        ) : (
+          <div className="w-full flex flex-row justify-around pt-1 border-t-[1px]">
+            <div className="text-2xl font-semibold text-[#DD2525] flex flex-row items-center justify-center gap-x-1">
+              <MdOutlineFreeCancellation />
+              <p>{room.status}</p>
+            </div>
+            <Link
+              className="relative text-[#1AACAC] font-semibold text-2xl flex flex-row items-center hover:text-[#F6F6F6] duration-300 room-detail px-2 py-1"
+              to={`/detail/${room.roomId}`}
+            >
+              <TbHandClick className="inline" />
+              Xem phòng ngay
+            </Link>
+          </div>
+        )}
       </div>
       <div className="w-[1px] h-[90%] bg-[#CCC] mt-[1.25%] "></div>
       <div className="basis-1/5 h-full rounded-r-2xl p-4 flex flex-col justify-center gap-y-4">
@@ -104,28 +133,13 @@ const RoomDetail = (props) => {
           <div>
             <p className="line-through">{basePriceString} đ</p>
             <div className="text-red-600 text-[24px] font-semibold">
-              {salePriceString} <span className="text-sm">đ</span>
+              {salePriceString} <span className="text-[24px]">đ</span>
             </div>
           </div>
         ) : (
           <div>{basePriceString}</div>
         )}
         <p className="font-semibold text-[#362FD9]">+ Huỷ miễn phí</p>
-        <div className="flex flex-row gap-x-2 justify-center items-center">
-          <div className="flex flex-col items-end font-semibold">
-            <p>{classify}</p>
-            <p>{room.reviewCount} đánh giá</p>
-          </div>
-          <div className="relative">
-            <IoChatbubbleSharp
-              size={32}
-              className="absolute text-[#362FD9] top-2/4 left-2/4  -translate-y-2/4"
-            />
-            <p className="absolute text-sm bottom-2/4 left-1 text-white translate-y-2/4">
-              {voteAvg}
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );
