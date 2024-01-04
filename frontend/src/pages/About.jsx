@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoDotFill } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const About = () => {
   const slideImgs = [
@@ -21,15 +22,15 @@ const About = () => {
   };
 
   const secondLayer = {
-    main:"https://images.unsplash.com/photo-1506059612708-99d6c258160e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjAzfHxob3RlbHxlbnwwfHwwfHx8MA%3D%3D",
+    main: "https://images.unsplash.com/photo-1506059612708-99d6c258160e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjAzfHxob3RlbHxlbnwwfHwwfHx8MA%3D%3D",
     sub: [
       "https://plus.unsplash.com/premium_photo-1683133440756-3b91f36aff20?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI1fHxob3RlbHxlbnwwfHwwfHx8MA%3D%3D",
       "https://images.unsplash.com/photo-1571003123771-bd6a099dd83a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI0fHxob3RlbHxlbnwwfHwwfHx8MA%3D%3D",
       "https://images.unsplash.com/photo-1584132905271-512c958d674a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjQ3fHxob3RlbHxlbnwwfHwwfHx8MA%3D%3D",
       "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjUxfHxob3RlbHxlbnwwfHwwfHx8MA%3D%3D",
-    ]
-  }
-  
+    ],
+  };
+
   const size = slideImgs.length;
   const [index, setIndex] = useState(0);
 
@@ -43,7 +44,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="w-screen h-[500px] m-auto mt-16">
+    <div className="w-screen m-auto mt-16">
       <div className="max-w-[1200px] bg-[#EEEEEE] mx-auto rounded-2xl flex flex-row p-8">
         <div className="basis-3/5">
           <div className="title flex flex-col items-start pl-0 w-full justify-around gap-y-4">
@@ -54,8 +55,8 @@ const About = () => {
             <p className="text-justify">
               <span className="text-[#1AACAC] font-semibold">BORN PINK</span>{" "}
               luôn tự hào là điểm đến lý tưởng cho những trải nghiệm đẳng cấp và
-              không gian thư giãn tuyệt vời. Với vị trí đắc địa tại trung tâm
-              thành phố Hồ Chí Minh, chúng tôi mang đến không gian sang trọng và
+              không gian thư giãn tuyệt vời. Với vị trí đắc địa tại thành phố
+              nghỉ dưỡng Đà Nẵng, chúng tôi mang đến không gian sang trọng và
               dịch vụ chất lượng, đảm bảo mọi chuyến đi của quý khách trở nên
               đặc biệt và nhớ mãi.
             </p>
@@ -81,17 +82,165 @@ const About = () => {
         </div>
       </div>
 
-      <div className="w-full py-10 bg-[#EEEEEE] flex flex-col justify-center items-center h-[400px]">
-        <div className="max-w-[1200px] h-full">
+      <div className="w-full py-10 bg-[#EEEEEE] flex flex-col justify-center items-center h-[450px] my-16">
+        <div className="w-[1200px] h-[400px] overflow-x-hidden scrollbar-hide whitespace-nowrap scroll-smooth flex flex-col gap-y-8">
           <div className="layer-1 flex flex-row w-full h-full gap-x-8">
-            <img src={firstLayer.main} className="basis-3/5 w-full h-full object-cover" />
-            <div className="basis-2/5"></div>
+            <img
+              src={firstLayer.main}
+              className="basis-3/5 w-full h-full object-cover rounded-xl"
+            />
+            <div className="basis-2/5 grid grid-cols-2 gap-2 my-auto">
+              {firstLayer.sub.map((value, index) => {
+                return (
+                  <img
+                    key={index}
+                    src={value}
+                    className="object-cover h-[150px] w-[225px] rounded-xl"
+                  />
+                );
+              })}
+            </div>
           </div>
           <div className="layer-2 flex flex-row w-full h-full gap-x-8">
-            <div className="basis-2/5"></div>
-            <img src={secondLayer.main} className="basis-3/5 w-full h-full object-cover" />
+            <div className="basis-2/5 grid grid-cols-2 gap-2 my-auto">
+              {secondLayer.sub.map((value, index) => {
+                return (
+                  <img
+                    key={index}
+                    src={value}
+                    className="object-cover h-[150px] w-[225px] rounded-xl"
+                  />
+                );
+              })}
+            </div>
+            <img
+              src={secondLayer.main}
+              className="basis-3/5 w-full h-full object-cover rounded-xl"
+            />
           </div>
         </div>
+      </div>
+      <div className="w-full mb-16 flex flex-col gap-y-16">
+        <h1 className="w-full text-center text-4xl font-bold text-[#1AACAC] mb-8">
+          Dịch vụ nghỉ dưỡng tuyệt vời nhất cho bạn
+        </h1>
+        <div className="flex flex-row w-[1200px] gap-x-16 mx-auto">
+          <div className="flex flex-col items-center gap-y-8 basis-2/4">
+            <img
+              className="w-3/5 rounded-xl object-cover"
+              src="https://i.pinimg.com/564x/07/0a/2b/070a2b97082d83a6f4033a4f3d1eda27.jpg"
+            />
+            <h1 className="text-2xl text-slate-500 font-semibold">
+              Đội ngũ nhân viên chuyên nghiệp và nhiệt huyết
+            </h1>
+            <div className="flex flex-col items-center p-8 rounded-2xl bg-[#EEEEEE] text-slate-500 gap-y-4">
+              <p>
+                Đội ngũ nhân viên tại{" "}
+                <span className="text-[#1AACAC] text-xl font-bold">
+                  BORN PINK
+                </span>{" "}
+                không chỉ là những chuyên gia trong lĩnh vực của họ mà còn là
+                những người yêu nghề và tận tâm với sự hài lòng của quý khách.
+              </p>
+              <p>
+                Mỗi thành viên trong đội ngũ của chúng tôi đều được đào tạo
+                chuyên sâu về phục vụ khách hàng và sự chuyên nghiệp. Tận tâm và
+                sẵn sàng giúp đỡ, họ không chỉ là những người làm việc, mà còn
+                là những người bạn đồng hành của quý khách trong suốt thời gian
+                lưu trú tại khách sạn.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-y-8 basis-2/4">
+            <h1 className="text-2xl text-slate-500 font-semibold">
+              Dịch vụ chăm sóc khách hàng 24/7
+            </h1>
+            <img
+              className="w-3/5 rounded-xl object-cover"
+              src="https://i.pinimg.com/564x/c7/55/da/c755da4cff4b0dc06dcb67dd810b1953.jpg"
+            />
+            <div className="flex flex-col items-center p-8 rounded-2xl bg-[#EEEEEE] text-slate-500 gap-y-4">
+              <p>
+                Tại{" "}
+                <span className="text-[#1AACAC] text-xl font-bold">
+                  BORN PINK
+                </span>{" "}
+                , chúng tôi hiểu rằng sự thoải mái và hài lòng của quý khách là
+                ưu tiên hàng đầu. Với dịch vụ phòng 24/7, chúng tôi luôn sẵn
+                sàng đáp ứng mọi yêu cầu của quý khách, từ đặt phòng, đồ ăn, đến
+                các yêu cầu đặc biệt khác nhau.
+              </p>
+              <p>
+                Đội ngũ chăm sóc khách hàng của chúng tôi không chỉ đơn thuần là
+                nhân viên, mà còn là những người bạn lựa chọn đáng tin cậy trong
+                mọi tình huống.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-row w-[1200px] gap-x-16 mx-auto">
+          <div className="flex flex-col items-center gap-y-8 basis-2/4">
+            <img
+              className="w-3/5 rounded-xl object-cover"
+              src="https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGhvdGVsfGVufDB8fDB8fHww"
+            />
+            <h1 className="text-2xl text-slate-500 font-semibold">
+              Phòng ở sang trọng, không gian thoải mái
+            </h1>
+            <div className="flex flex-col items-center p-8 rounded-2xl bg-[#EEEEEE] text-slate-500 gap-y-4">
+              <p>
+                Tại{" "}
+                <span className="text-[#1AACAC] text-xl font-bold">
+                  BORN PINK
+                </span>{" "}
+                , chúng tôi hiểu rằng sự thoải mái và hài lòng của quý khách là
+                ưu tiên hàng đầu. Với dịch vụ phòng 24/7, chúng tôi luôn sẵn
+                sàng đáp ứng mọi yêu cầu của quý khách, từ đặt phòng, đồ ăn, đến
+                các yêu cầu đặc biệt khác nhau.
+              </p>
+              <p>
+                Đội ngũ chăm sóc khách hàng của chúng tôi không chỉ đơn thuần là
+                nhân viên, mà còn là những người bạn lựa chọn đáng tin cậy trong
+                mọi tình huống.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-y-8 basis-2/4">
+            <h1 className="text-2xl text-slate-500 font-semibold">
+              Tiện Nghi và Dịch Vụ Đẳng Cấp
+            </h1>
+            <img
+              className="w-3/5 rounded-xl object-cover"
+              src="https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG90ZWwlMjBzZXJ2aWNlfGVufDB8fDB8fHww"
+            />
+            <div className="flex flex-col items-center p-8 rounded-2xl bg-[#EEEEEE] text-slate-500 gap-y-4">
+              <p>
+                Tại{" "}
+                <span className="text-[#1AACAC] text-xl font-bold">
+                  BORN PINK
+                </span>{" "}
+                , chúng tôi hiểu rằng sự thoải mái và hài lòng của quý khách là
+                ưu tiên hàng đầu. Với dịch vụ phòng 24/7, chúng tôi luôn sẵn
+                sàng đáp ứng mọi yêu cầu của quý khách, từ đặt phòng, đồ ăn, đến
+                các yêu cầu đặc biệt khác nhau.
+              </p>
+              <p>
+                Đội ngũ chăm sóc khách hàng của chúng tôi không chỉ đơn thuần là
+                nhân viên, mà còn là những người bạn lựa chọn đáng tin cậy trong
+                mọi tình huống.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full flex flex-row justify-center mb-16">
+        <Link
+          type="button"
+          to={"/rooms"}
+          className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2  text-xl"
+        >
+          Now's your relax time!
+        </Link>
       </div>
     </div>
   );
