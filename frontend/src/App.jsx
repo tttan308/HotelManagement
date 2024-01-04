@@ -46,6 +46,7 @@ export default function App() {
           <Route path='/rooms/:id' element={<RoomDetail />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/contact' element={<Contact />} />
         </Route>
       </Routes>
     </div>
